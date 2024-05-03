@@ -7,19 +7,17 @@ import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 
-fun Route.messagesRouting(messages:MutableList<Message>) {
+fun Route.messagesRouting() {
+    var missatgeEmmagatzemat:Message? = null
     route("/message") {
         post {
-            val message = call.receive<Message>()
-            messages.add(message)
-            call.respond(HttpStatusCode.Created)
+            missatgeEmmagatzemat = call.receive<Message>()
+            call.respond(HttpStatusCode.Created, missatgeEmmagatzemat!!)
         }
         get {
-            if (messages.isNotEmpty()) {
-                call.respond(HttpStatusCode.OK, messages.removeAt(0))
-            } else {
-                call.respond(HttpStatusCode.NotFound)
-            }
+            missatgeEmmagatzemat?.let {
+                call.respond(it)
+            } ?: call.respond(HttpStatusCode.NotFound)
         }
     }
 }
