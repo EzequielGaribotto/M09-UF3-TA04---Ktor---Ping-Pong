@@ -1,4 +1,4 @@
-package com.example.controllers
+package com.example.server
 
 import com.example.plugins.*
 import io.ktor.server.application.*
