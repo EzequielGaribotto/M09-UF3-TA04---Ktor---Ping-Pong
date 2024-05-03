@@ -15,12 +15,8 @@ fun main() {
 }
 
 fun Application.module() {
-    configureRouting()
+    configureRouting(messages)
     configureSerialization()
-}
-
-fun Application.configureRouting() {
-    routing { messagesRouting(messages) }
 }
 
 
