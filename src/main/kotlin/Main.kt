@@ -13,7 +13,7 @@ import kotlinx.coroutines.runBlocking
 fun main() = runBlocking {
     val client = HttpClient(CIO)
 
-    val message = Message("Hola")
+    val message = Message("Ping!")
     val response: HttpResponse = client.post("http://localhost:8080/message") {
         contentType(ContentType.Application.Json)
         body = Json.encodeToString(message)
