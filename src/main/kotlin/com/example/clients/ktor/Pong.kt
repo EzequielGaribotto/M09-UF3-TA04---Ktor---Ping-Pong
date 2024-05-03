@@ -11,8 +11,8 @@ import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.encodeToString
 
 fun main() = runBlocking {
-    val client = HttpClient(CIO)
     while (true) {
+        val client = HttpClient(CIO)
         Thread.sleep(1000)
 
         val message = Message("Ping!")
@@ -21,7 +21,6 @@ fun main() = runBlocking {
             contentType(ContentType.Application.Json)
             setBody(Json.encodeToString(message))
         }
-
         println("Status després del POST: ${response.status}")
 
         response = client.get("http://localhost:8080/message")
@@ -29,6 +28,7 @@ fun main() = runBlocking {
 
         val msg = Json.decodeFromString<Message>(response.bodyAsText())
         println("MISSATGE: ${msg.content}")
+
+        client.close()
     }
-    client.close()
 }
